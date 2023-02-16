@@ -16,7 +16,7 @@ mongodb.MongoClient.connect(url, {
   });
 
 // CSV file name
-const fileName = "photos.csv";
+const fileName = "features.csv";
 var arrayToInsert = [];
 csvtojson()
   .fromFile(fileName)
@@ -25,15 +25,15 @@ csvtojson()
     for (var i = 0; i < source.length; i++) {
       var oneRow = {
         id: source[i]["id"],
-        styleId: source[i]["styleId"],
-        url: source[i]["url"],
-        thumbnail_url: source[i]["thumbnail_url"],
+        product_id: source[i]["product_id"],
+        feature: source[i]["feature"],
+        value: source[i]["value"],
       };
       arrayToInsert.push(oneRow);
     }
     //inserting into the table "employees"
     console.log("done sorting");
-    var collectionName = "photos";
+    var collectionName = "features";
     var collection = dbConn.collection(collectionName);
     collection.insertMany(arrayToInsert, (err, result) => {
       if (err) console.log(err);
